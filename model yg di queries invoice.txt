@@ -1,0 +1,15 @@
+public function get_detail_po($PO_KD)
+	{
+		$this->db->select('sw_customer.*, sw_motor.*, sw_penawaran.*, sw_po.*, sw_user.*, sw_workscope.*');
+		$this->db->join('sw_customer', 'sw_customer.CUSTOMER_KD = sw_penawaran.CUSTOMER_KD', 'right');
+		$this->db->join('sw_motor', 'sw_motor.MOTOR_KD = sw_penawaran.MOTOR_KD', 'right');
+		$this->db->join('sw_po', 'sw_po.PO_KD = sw_penawaran.PO_KD', 'right');
+		$this->db->join('sw_user', 'sw_user.USER_KD = sw_penawaran.USER_KD', 'right');
+		$this->db->join('sw_workscope', 'sw_workscope.WORK_KD = sw_penawaran.WORK_KD', 'right');
+
+		$this->db->where('sw_penawaran.PO_KD', $PO_KD);
+		$result = $this->db->get('sw_penawaran');
+		return $result->result();
+
+		$this->db->last_query();
+	}

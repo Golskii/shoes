@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteBase    /shoes/
+RewriteCond $1 !^(index\.php|images|assets|layouts|robots\.txt)
+RewriteRule ^(.*)$ /shoes/index.php/$1 [L]

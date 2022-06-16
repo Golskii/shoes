@@ -1,0 +1,140 @@
+public function viewpendingpo($PO_KD=null)
+    {
+        if($this->session->userdata('login')){
+            if ($PO_KD != null) {
+                $this->load->model("invoice/queries_invoice");
+                $dat_order = $this->queries_invoice->get_detail_po($PO_KD)[0];
+                $dat_order->ADDITIONAL = $this->queries_invoice->get_additional($dat_order->PENAWARAN_KD);
+                $dat_order->CUSTOM = $this->queries_invoice->get_custom($dat_order->PENAWARAN_KD);
+                $dat_order->PERBAIKAN = $this->queries_invoice->get_perbaikan($dat_order->PENAWARAN_KD);
+
+                $this->load->model("queries");
+                $dat_order->WORK = $this->queries->get_work_byKD($dat_order->WORK_KD)[0];
+                $dat_order->MOTOR = $this->queries->get_motor_byKD($dat_order->MOTOR_KD)[0];
+
+                $materialTotalCustom = 0;
+                $serviceTotalCustom = 0;
+                if ($dat_order != null) {
+                    foreach ((array)$dat_order->CUSTOM as $key =>$value){
+
+                        $materialTotalCustom += $value['HARGA_MATERIAL_SM'];
+                        $serviceTotalCustom += $value['HARGA_JASA_SM'];
+                    }
+                }
+                $materialTotalAdt = 0;
+                $serviceTotalAdt = 0;
+                if ($dat_order != null) {
+                    foreach ((array)$dat_order->ADDITIONAL as $key =>$value) {
+                        $materialTotalAdt += $value['HARGA_MATERIAL_SM'];
+                        $serviceTotalAdt += $value['HARGA_JASA_SM'];
+                    }
+                }
+
+                $this->page['dat_material_total'] = $materialTotalCustom + $materialTotalAdt;
+                $this->page['dat_service_total'] = $serviceTotalCustom + $serviceTotalAdt;
+
+
+                $this->page['dat_order'] = $dat_order;
+                $this->page['page'] = 'manajer/view-po-pending';
+                $this->load->view('master-be', $this->page);
+            }else{
+                redirect(site_url('master-manajer/pendingpo/'));
+            }
+        }else{
+            $this->load->view('f_login');
+        }
+    }
+
+    public function viewprocesspo($PO_KD=null)
+    {
+        if($this->session->userdata('login')){
+            if ($PO_KD != null) {
+                $this->load->model("invoice/queries_invoice");
+                $dat_order = $this->queries_invoice->get_detail_po($PO_KD)[0];
+                $dat_order->ADDITIONAL = $this->queries_invoice->get_additional($dat_order->PENAWARAN_KD);
+                $dat_order->CUSTOM = $this->queries_invoice->get_custom($dat_order->PENAWARAN_KD);
+                $dat_order->PERBAIKAN = $this->queries_invoice->get_perbaikan($dat_order->PENAWARAN_KD);
+
+                $this->load->model("queries");
+                $dat_order->WORK = $this->queries->get_work_byKD($dat_order->WORK_KD)[0];
+                $dat_order->MOTOR = $this->queries->get_motor_byKD($dat_order->MOTOR_KD)[0];
+
+                $materialTotalCustom = 0;
+                $serviceTotalCustom = 0;
+                if ($dat_order != null) {
+                    foreach ((array)$dat_order->CUSTOM as $key =>$value){
+
+                        $materialTotalCustom += $value['HARGA_MATERIAL_SM'];
+                        $serviceTotalCustom += $value['HARGA_JASA_SM'];
+                    }
+                }
+                $materialTotalAdt = 0;
+                $serviceTotalAdt = 0;
+                if ($dat_order != null) {
+                    foreach ((array)$dat_order->ADDITIONAL as $key =>$value) {
+                        $materialTotalAdt += $value['HARGA_MATERIAL_SM'];
+                        $serviceTotalAdt += $value['HARGA_JASA_SM'];
+                    }
+                }
+
+                $this->page['dat_material_total'] = $materialTotalCustom + $materialTotalAdt;
+                $this->page['dat_service_total'] = $serviceTotalCustom + $serviceTotalAdt;
+
+
+                $this->page['dat_order'] = $dat_order;
+                $this->page['page'] = 'manajer/view-po-process';
+                $this->load->view('master-be', $this->page);
+            }else{
+                redirect(site_url('master-manajer/processpo/'));
+            }
+        }else{
+            $this->load->view('f_login');
+        }
+    }
+
+    public function viewcompletepo($PO_KD=null)
+    {
+        if($this->session->userdata('login')){
+            if ($PO_KD != null) {
+                $this->load->model("invoice/queries_invoice");
+                $dat_order = $this->queries_invoice->get_detail_po($PO_KD)[0];
+                $dat_order->ADDITIONAL = $this->queries_invoice->get_additional($dat_order->PENAWARAN_KD);
+                $dat_order->CUSTOM = $this->queries_invoice->get_custom($dat_order->PENAWARAN_KD);
+                $dat_order->PERBAIKAN = $this->queries_invoice->get_perbaikan($dat_order->PENAWARAN_KD);
+
+                $this->load->model("queries");
+                $dat_order->WORK = $this->queries->get_work_byKD($dat_order->WORK_KD)[0];
+                $dat_order->MOTOR = $this->queries->get_motor_byKD($dat_order->MOTOR_KD)[0];
+
+                
+                $materialTotalCustom = 0;
+                $serviceTotalCustom = 0;
+                if ($dat_order != null) {
+                    foreach ((array)$dat_order->CUSTOM as $key =>$value){
+
+                        $materialTotalCustom += $value['HARGA_MATERIAL_SM'];
+                        $serviceTotalCustom += $value['HARGA_JASA_SM'];
+                    }
+                }
+                $materialTotalAdt = 0;
+                $serviceTotalAdt = 0;
+                if ($dat_order != null) {
+                    foreach ((array)$dat_order->ADDITIONAL as $key =>$value) {
+                        $materialTotalAdt += $value['HARGA_MATERIAL_SM'];
+                        $serviceTotalAdt += $value['HARGA_JASA_SM'];
+                    }
+                }
+
+                $this->page['dat_material_total'] = $materialTotalCustom + $materialTotalAdt;
+                $this->page['dat_service_total'] = $serviceTotalCustom + $serviceTotalAdt;
+
+                $this->page['dat_order'] = $dat_order;
+                $this->page['page'] = 'manajer/view-po-complete';
+                $this->load->view('master-be', $this->page);
+            }else{
+                redirect(site_url('master-manajer/completepo/'));
+            }
+        }else{
+            $this->load->view('f_login');
+        }
+    }
