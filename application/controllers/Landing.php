@@ -37,8 +37,12 @@ class Landing extends CI_Controller {
 			'Delivery' => '75%',
 			'Close' => '100%',
 		];
-		$this->page['dat_order'] = $this->queries_customer->get_order_byCustomer($data['kode']);		
-		$this->page['status'] = $status[$this->page['data']->STATUS];
+		$this->page['dat_order'] = $this->queries_customer->get_order_byCustomer($data['kode']);
+		if(isset($this->page['data']->STATUS)){
+			$this->page['status'] = $status[$this->page['data']->STATUS];
+		}else{
+			$this->page['error'] = "Order tidak ditemukan, periksa kembali Kode Order Anda.";
+		}
 		$this->load->view('v_landing.php', $this->page);
 	}
 }

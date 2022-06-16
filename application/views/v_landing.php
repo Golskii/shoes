@@ -30,8 +30,8 @@
 			<div class="masthead" style="background-image: '<?php echo base_url('\"assets/build/images/sepatu.jpg\"') ?>">
 				<div class="masthead-content text-white">
 					<div class="container-fluid px-4 px-lg-0">
-						<h1 class="fst-italic lh-1 mb-4">Our Website is Coming Soon</h1>
-						<p class="mb-5">We're working hard to finish the development of this site. Sign up below to receive updates and to be notified when we launch!</p>
+						<h1 class="fst-italic lh-1 mb-4"><img src="<?=base_url()?>assets/images/logo2.png" alt="..." style="width: 100px;padding-top: 0px;"><span><img src="<?=base_url()?>assets/images/logo3.png" alt="..." style="width: 360px;"></h1>
+						<p class="mb-5" style="font-family: Lucida Handwriting;font-size: 30px;">Your shoes solution.</p>
 						<!-- * * * * * * * * * * * * * * *-->
 						<!-- * * SB Forms Contact Form * *-->
 						<!-- * * * * * * * * * * * * * * *-->
@@ -42,7 +42,10 @@
 						<form id="contactForm" method="post" action="<?php echo base_url('landing/getCustomer#trackingPage') ?>">
 							<!-- Email address input-->
 							<div class="row input-group-newsletter">
-								<div class="col"><input class="form-control" id="kode" type="text" name="kode" placeholder="Enter tracking code..." aria-label="Enter tracking code..." required /></div>
+								<div class="col">
+									<input class="form-control" id="kode" type="text" name="kode" placeholder="Enter tracking code..." aria-label="Enter tracking code..." required />
+									<?php if(isset($error)): ?><span style="color: red;"><?= $error ?></span> <?php endif ?>
+								</div>
 								<div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Start Tracking Now</button></div>
 							</div>
 						</form>
